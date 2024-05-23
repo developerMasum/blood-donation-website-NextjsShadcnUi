@@ -1,20 +1,65 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import SearchBox from "./components/SearchBox";
 import Image from "next/image";
 import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import { TDonner } from "@/types/donner";
 import { useGetAllDonnerQuery } from "@/redux/api/donnerApi";
-
+import { Input } from "@/components/ui/input";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { FieldValues, useForm } from "react-hook-form";
+import { Button } from "@/components/ui/button";
+import { useDebounced } from "@/redux/hooks";
+const formSchema = z.object({
+  query: z.string(),
+});
 const DonnerListPAge = () => {
-  const { data, isLoading } = useGetAllDonnerQuery({});
-  const donners = data?.donner;
-
+   const [searchTerm, setSearchTerm] = useState("");
+  const onSubmit = (data: FieldValues) => {
+   setSearchTerm(data?.query);
+  };
+  const query: Record<string, any> = {};
+  const debouncedTerm = useDebounced({
+    searchQuery: searchTerm,
+    delay: 600,
+  });
+  
+  if (!!debouncedTerm) {
+    query["searchTerm"] = searchTerm;
+  }
+  const { data, isLoading } = useGetAllDonnerQuery({ ...query });
+  const donners: TDonner[] | undefined = data?.donner as TDonner[] | undefined;
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      query: "",
+    },
+  });
+  
   return (
     <div>
-      donar list page
-      <SearchBox />
+      <div>
+        <form onChange={handleSubmit(onSubmit)} className="flex items-center">
+          <Input
+            type="text"
+            placeholder="Search"
+            {...register("query")}
+            className="mr-2"
+          />
+        
+          {errors.query && (
+            <span className="text-red-500">
+              Please enter a valid search query
+            </span>
+          )}
+        </form>
+      </div>
       {isLoading && <div>Loading...</div>}
       <div className="grid grid-cols-1 md:lg:grid-cols-6 gap-4 mt-12">
         {donners &&
@@ -34,7 +79,7 @@ const DonnerListPAge = () => {
                     </div>
                     <div className="mt-4 text-center">
                       <p className="text-lg font-semibold text-gray-900">
-                        John Doe
+                       {donner.name}
                       </p>
                       <p className="text-sm text-gray-500">Blood Group: A+</p>
                       <p className="text-sm text-gray-500">

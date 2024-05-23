@@ -6,7 +6,9 @@ import { useGetSingleDonnerQuery } from "@/redux/api/donnerApi";
 import { ChevronsRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useState } from "react";
+import { RequestDialog } from "./components/RequestDialog";
+import { getUserInfo } from "@/services/actions/auth.services";
 
 type TParams = {
   params: {
@@ -14,16 +16,24 @@ type TParams = {
   };
 };
 const DonnerDetailsPage = ({ params }: TParams) => {
+    const userInfo = getUserInfo();
+    // console.log(userInfo?.id)
   const { data, isLoading } = useGetSingleDonnerQuery(params.id);
+  const [open, setOpen] = useState(false);
 
   if (isLoading) {
     return <div>Loading...</div>;
   }
 
+  const currentDonnerId = data?.id;
+  // const handleReq = () => {
+  //   // console.log("hello");
+  // };
+
   return (
     <div className="w-full min-h-screen px-4 py-4 lg:px-8 lg:py-8">
       <div className="flex flex-wrap items-center gap-2 mb-4">
-        <Link href="/donor-list">Donner List</Link> <ChevronsRight />
+        <Link href="/donner-list">Donner List</Link> <ChevronsRight />
         <p>Details</p> <ChevronsRight />
         <p className="text-red-700 font-bold">{data?.name}</p>
       </div>
@@ -41,7 +51,15 @@ const DonnerDetailsPage = ({ params }: TParams) => {
           <div className="px-2 py-2 text-xl font-semibold bg-slate-100 w-full max-w-sm lg:w-56 rounded-md shadow-lg mt-4">
             <p className="text-red-700">{data?.UserProfile?.bio}</p>
           </div>
-          <Button className="mt-4">Request For Blood </Button>
+
+          <div className="mt-8">
+            <RequestDialog
+              currentDonnerId={currentDonnerId}
+              userInfo={userInfo}
+              open={open}
+              setOpen={setOpen}
+            />
+          </div>
         </div>
         <div className="flex flex-col items-center lg:items-start">
           <p className="px-3 py-3 text-xl font-semibold text-green-600  text-center">

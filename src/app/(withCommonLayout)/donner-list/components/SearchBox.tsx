@@ -24,8 +24,8 @@ const SearchBox = () => {
   });
 
   const onSubmit = (data:any) => {
-    // console.log(data);
-    router.push(`/donner-list?query=${data.query}`)
+    console.log(data);
+   
   };
 
   return (

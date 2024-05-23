@@ -4,14 +4,21 @@ import { IMeta } from "@/types/common";
 
 export const donnerApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    createdonner: build.mutation({
-      query: (data) => ({
-        url: "/donner/create-donner",
-        method: "POST",
-        contentType: "multipart/form-data",
-        data,
-      }),
-      invalidatesTags: [tagTypes.donner],
+   
+    createDonnerRequest: build.mutation({
+      query: (data) => {
+        console.log(data)
+        return {
+          url: "/donation-request",
+          method: "POST",
+
+          headers: {
+            "Content-Type": "application/json",
+          },
+          data,
+        };
+      }
+      // invalidatesTags: [{ type: "Donner", id: "LIST" }],
     }),
 
     getAllDonner: build.query({
@@ -59,4 +66,4 @@ export const donnerApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetAllDonnerQuery,useGetSingleDonnerQuery } = donnerApi;
+export const { useGetAllDonnerQuery,useGetSingleDonnerQuery,useCreateDonnerRequestMutation } = donnerApi;
