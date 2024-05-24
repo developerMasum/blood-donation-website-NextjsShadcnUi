@@ -27,6 +27,7 @@ import { getUserInfo, storeUserInfo } from "@/services/actions/auth.services";
 import { useRouter } from "next/navigation";
 import { useCreateDonnerRequestMutation, useGetSingleDonnerQuery } from "@/redux/api/donnerApi";
 import { useGetMYProfileQuery } from "@/redux/api/myProfile";
+import { TUserType } from "../page";
 
 const formSchema = z.object({
   phoneNumber: z.string().length(11, {
@@ -47,17 +48,17 @@ const formSchema = z.object({
 });
 
 const ProfileForm = ({
-  className,
+  
   userInfo,
   currentDonnerId,
-}: React.ComponentProps<"form">) => {
-  //   const userInfo = getUserInfo();
-  //   console.log(userInfo?.id)
-  // const {data:userT} = useGetMYProfileQuery(undefined)
-  // console.log(userT)
-  //   console.log(userInfo)
+}: {
+ 
+  userInfo: TUserType;
+  currentDonnerId: string;
+}) => {
+
   const { data, isLoading } = useGetSingleDonnerQuery(userInfo.id as string);
-  console.log(currentDonnerId,"+++++++++");
+  console.log(currentDonnerId, "+++++++++");
   const [createDonnerRequest] = useCreateDonnerRequestMutation();
   const router = useRouter();
 
@@ -82,7 +83,7 @@ const ProfileForm = ({
       dateOfDonation: values.dateOfDonation,
       donorId: currentDonnerId,
     };
-    console.log(data,"data...............")
+    console.log(data, "data...............");
     try {
       const result = await createDonnerRequest(data).unwrap();
       console.log("Request succeeded:", result);
@@ -95,7 +96,7 @@ const ProfileForm = ({
     <Form {...form}>
       <form
         onSubmit={form.handleSubmit(onSubmit)}
-        className={`w-full ${className}`}
+        className="w-full px-4 "
       >
         <div className="w-full space-y-4 p-4 border-0 shadow-sm">
           <FormField

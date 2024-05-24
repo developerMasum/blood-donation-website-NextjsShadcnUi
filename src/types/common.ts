@@ -1,4 +1,4 @@
-// import { USER_ROLE } from "@/constants/role";
+import { USER_ROLE } from "@/constants/role";
 
 
 export type IMeta = {
@@ -7,7 +7,7 @@ export type IMeta = {
   total: number;
 };
 
-// export type UserRole = keyof typeof USER_ROLE;
+export type UserRole = keyof typeof USER_ROLE;
 
 
 
@@ -28,3 +28,11 @@ export type IGenericErrorMessage = {
 };
 
 export const Gender = ["MALE", "FEMALE"];
+
+
+export interface ISidebarItem {
+  title: string;
+  path?: string;
+  icon: React.ElementType;
+  subMenu?: ISidebarItem[];
+}

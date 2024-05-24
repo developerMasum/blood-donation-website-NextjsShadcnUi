@@ -17,3 +17,15 @@ export interface TDonner {
     updatedAt: string;
   };
 } 
+
+
+  export const bloodGroups: string[] = [
+    "A+",
+    "A-",
+    "B+",
+    "B-",
+    "AB+",
+    "AB-",
+    "O+",
+    "O-",
+  ];

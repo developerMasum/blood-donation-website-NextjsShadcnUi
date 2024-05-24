@@ -15,13 +15,13 @@ const Home = () => {
   return (
     <div>
       <Banner />
-    <div>
+      <div>
         <SaveLife />
-    </div>
+      </div>
 
       <Ads />
       <SearchButton />
-      <div className="flex justify-center gap-12 items-center content-center w-full mt-16">
+      <div className="flex flex-col md:lg:flex-row justify-center   md:lg:gap-12 items-center content-center w-full mt-16">
         <TopDonner />
         <DonorList />
       </div>

@@ -19,7 +19,7 @@ const SaveLife = () => {
         </p>
       </div>
       <div className="flex flex-wrap gap-4 justify-center mt-5">
-        <div className="bg-white rounded-lg shadow-md p-4 w-52 flex flex-col items-center text-center">
+        <div className="bg-white rounded-lg shadow-md p-4 w-full md:lg:w-full md:lg:w-52 flex flex-col items-center text-center">
           <Image
             src={assets.images.donate}
             alt="engage"
@@ -31,7 +31,7 @@ const SaveLife = () => {
           </p>
           <p>expertise, money, and equipment to poor nations.</p>
         </div>
-        <div className="bg-white rounded-lg shadow-md p-4 w-52 flex flex-col items-center text-center">
+        <div className="bg-white rounded-lg shadow-md p-4 w-full md:lg:w-52 flex flex-col items-center text-center">
           <Image
             src={assets.images.resources}
             alt="engage"
@@ -43,7 +43,7 @@ const SaveLife = () => {
           </p>
           <p>expertise, money, and equipment to poor nations.</p>
         </div>
-        <div className="bg-white rounded-lg shadow-md p-4 w-52 flex flex-col items-center text-center">
+        <div className="bg-white rounded-lg shadow-md p-4 w-full md:lg:w-52 flex flex-col items-center text-center">
           <Image
             src={assets.images.inform}
             alt="engage"
@@ -55,7 +55,7 @@ const SaveLife = () => {
           </p>
           <p>voluntary, non­-remunerated blood donation.</p>
         </div>
-        <div className="bg-white rounded-lg shadow-md p-4 w-52 flex flex-col items-center text-center">
+        <div className="bg-white rounded-lg shadow-md p-4 w-full md:lg:w-52 flex flex-col items-center text-center">
           <Image
             src={assets.images.inform}
             alt="engage"
@@ -67,7 +67,7 @@ const SaveLife = () => {
           </p>
           <p>about the global inequalities for accessing safe blood.</p>
         </div>
-        <div className="bg-white rounded-lg shadow-md p-4 w-52 flex flex-col items-center text-center">
+        <div className="bg-white rounded-lg shadow-md p-4 w-full md:lg:w-52 flex flex-col items-center text-center">
           <Image
             src={assets.images.engage}
             alt="engage"

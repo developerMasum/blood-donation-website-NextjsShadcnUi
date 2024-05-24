@@ -1,6 +1,6 @@
 import * as React from "react";
 
-import { cn } from "@/lib/utils";
+
 // import { useMediaQuery, } from "@/hooks/use-media-query";
 import { Button } from "@/components/ui/button";
 
@@ -8,16 +8,13 @@ import {
   Drawer,
   DrawerClose,
   DrawerContent,
-  DrawerDescription,
   DrawerFooter,
   DrawerHeader,
-  DrawerTitle,
   DrawerTrigger,
 } from "@/components/ui/drawer";
 
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import ProfileForm from "./ProfileFom";
+import { TUserType } from "../page";
 
 
 export const RequestDialog = ({
@@ -28,6 +25,8 @@ export const RequestDialog = ({
 }: {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  userInfo: TUserType;
+  currentDonnerId: string;
 }) => {
   return (
     <Drawer open={open} onOpenChange={setOpen}>
@@ -42,7 +41,7 @@ export const RequestDialog = ({
               Use proper location and hospital name
             </DrawerDescription> */}
           </DrawerHeader>
-          <ProfileForm currentDonnerId={currentDonnerId} userInfo={userInfo} className="px-4" />
+          <ProfileForm currentDonnerId={currentDonnerId} userInfo={userInfo}  />
           <DrawerFooter className="pt-2 flex justify-end">
             <DrawerClose asChild>
               <Button variant="outline">Cancel</Button>

@@ -19,7 +19,7 @@ const AccordionQues = () => {
           height={500}
         />
       </div>
-      <div className="w-1/2">
+      <div className=" w-full md:lg:w-1/2">
         <div className="mb-5">
           <Accordion type="single" collapsible className="w-full">
             <div className="flex  justify-start items-center gap-5">

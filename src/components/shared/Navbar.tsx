@@ -2,13 +2,21 @@
 "use client";
 
 import Link from "next/link";
-import { AlignJustify, Package2 } from "lucide-react";
+import { AlignJustify } from "lucide-react";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
-import AuthDropdown from "./AuthDropdown";
-
+// import AuthDropdown from "./AuthDropdown";
+import { isLoggedIn } from "@/services/actions/auth.services";
+import Image from "next/image";
+import assets from "@/assets";
+import dynamic from "next/dynamic";
 
 const Header = () => {
+
+    const AuthDropdown = dynamic(
+      () => import("@/components/shared/AuthDropdown"),
+      { ssr: false }
+    );
   const menuItems = [
     {
       label: "Home",
@@ -16,18 +24,13 @@ const Header = () => {
       show: true,
     },
     {
-      label: "Donner",
+      label: "Donners",
       path: "/donner-list",
       show: true,
     },
     {
       label: "About Us",
       path: "/about-us",
-      show: true,
-    },
-    {
-      label: "Dashboard",
-      path: "/dashboard",
       show: true,
     },
   ];
@@ -50,8 +53,14 @@ const Header = () => {
                     href="/"
                     className="flex items-center gap-2 font-semibold"
                   >
-                    <Package2 className="h-6 w-6" />
-                    <span className="">ShareNest</span>
+                    <Image
+                      src={assets.icons.logo}
+                      alt="logo"
+                      width={40}
+                      height={40}
+                      // className="h-6 w-6"
+                    />
+                  
                   </Link>
                   <div className="grid gap-2 py-6">
                     {menuItems.map((menuItem) =>
@@ -70,8 +79,17 @@ const Header = () => {
                   href="/"
                   className="flex items-center gap-2 font-semibold"
                 >
-                  <Package2 className="h-6 w-6" />
-                  <span className="">ShareNest</span>
+                  <Image
+                    src={assets.icons.logo}
+                    alt="logo"
+                    width={100}
+                    height={100}
+                    // className="h-6 w-6"
+                  />
+                  <p className="uppercase">
+                    <span className="text-red-600 font-bold">Plasma</span>{" "}
+                    Pioneers
+                  </p>
                 </Link>
               </div>
             </div>
@@ -91,7 +109,9 @@ const Header = () => {
             </nav>
 
             <div className="flex items-center">
-              <AuthDropdown />
+          
+                <AuthDropdown />
+           
             </div>
           </header>
         </div>

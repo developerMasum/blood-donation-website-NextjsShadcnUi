@@ -10,14 +10,21 @@ import React, { useState } from "react";
 import { RequestDialog } from "./components/RequestDialog";
 import { getUserInfo } from "@/services/actions/auth.services";
 
-type TParams = {
+export type TParams = {
   params: {
     id: string;
   };
 };
+export type TUserType = {
+  email: string;
+  role: string;
+  id: string;
+  iat: number;
+  exp: number;
+};
 const DonnerDetailsPage = ({ params }: TParams) => {
-    const userInfo = getUserInfo();
-    // console.log(userInfo?.id)
+    const userInfo: TUserType = getUserInfo();
+    // console.log(userInfo)
   const { data, isLoading } = useGetSingleDonnerQuery(params.id);
   const [open, setOpen] = useState(false);
 
@@ -25,7 +32,7 @@ const DonnerDetailsPage = ({ params }: TParams) => {
     return <div>Loading...</div>;
   }
 
-  const currentDonnerId = data?.id;
+  const currentDonnerId:string = data?.id;
   // const handleReq = () => {
   //   // console.log("hello");
   // };
@@ -66,17 +73,19 @@ const DonnerDetailsPage = ({ params }: TParams) => {
             Personal Information
           </p>
           <Separator className="my-3" />
-          <div className="w-full max-w-sm space-y-4">
-            <div>
-              <p className="text-slate-500">Donner Name:</p>
-              <div className="px-2 py-2 text-xl font-semibold bg-slate-100 rounded-md shadow-lg">
-                <p className="text-red-700">{data?.name}</p>
+          <div className="w-full max-w-md space-y-4">
+            <div className="flex flex-row gap-12">
+              <div>
+                <p className="text-slate-500">Donner Name:</p>
+                <div className="px-2 py-2 text-xl font-semibold bg-slate-100 rounded-md shadow-lg">
+                  <p className="text-red-700">{data?.name}</p>
+                </div>
               </div>
-            </div>
-            <div>
-              <p className="text-slate-500">Blood Group:</p>
-              <div className="px-2 py-2 text-xl font-semibold bg-slate-100 rounded-md shadow-lg">
-                <p className="text-red-700">{data?.bloodType}</p>
+              <div>
+                <p className="text-slate-500">Blood Group:</p>
+                <div className="px-2 py-2 text-xl font-semibold bg-slate-100 rounded-md shadow-lg">
+                  <p className="text-red-700">{data?.bloodType}</p>
+                </div>
               </div>
             </div>
             <div>
@@ -93,16 +102,18 @@ const DonnerDetailsPage = ({ params }: TParams) => {
                 <p className="text-red-700">{data?.email}</p>
               </div>
             </div>
-            <div>
-              <p className="text-slate-500">Donner Age:</p>
-              <div className="px-2 py-2 text-xl font-semibold bg-slate-100 rounded-md shadow-lg">
-                <p className="text-red-700">{data?.UserProfile?.age}</p>
+            <div className="flex flex-row gap-12">
+              <div>
+                <p className="text-slate-500">Donner Age:</p>
+                <div className="px-2 py-2 text-xl font-semibold bg-slate-100 rounded-md shadow-lg">
+                  <p className="text-red-700">{data?.UserProfile?.age}</p>
+                </div>
               </div>
-            </div>
-            <div>
-              <p className="text-slate-500">Location:</p>
-              <div className="px-2 py-2 text-xl font-semibold bg-slate-100 rounded-md shadow-lg">
-                <p className="text-red-700">{data?.location}</p>
+              <div>
+                <p className="text-slate-500">Location:</p>
+                <div className="px-2 py-2 text-xl font-semibold bg-slate-100 rounded-md shadow-lg">
+                  <p className="text-red-700">{data?.location}</p>
+                </div>
               </div>
             </div>
             <div>
