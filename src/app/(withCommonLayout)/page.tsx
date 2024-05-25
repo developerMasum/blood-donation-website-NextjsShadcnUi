@@ -9,7 +9,7 @@ import { SearchButton } from "@/components/Home/Searchutton";
 import Testimonial from "@/components/Home/Tastimonial";
 import TopDonner from "@/components/Home/TopDonner";
 import { Button } from "@/components/ui/button";
-
+import { Divide } from "lucide-react";
 import React from "react";
 
 const Home = () => {
