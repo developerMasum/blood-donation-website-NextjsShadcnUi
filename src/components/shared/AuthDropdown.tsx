@@ -25,12 +25,12 @@ const AuthDropdown = () => {
    logoutUser(router);
  };
   return (
-    <div>
+    <div className="">
       {loggedIn ? (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="secondary" size="icon" className="rounded-full">
-              <CircleUser className="h-5 w-5" />
+              <CircleUser color="red"  className="h-5 w-5" />
               <span className="sr-only">Toggle user menu</span>
             </Button>
           </DropdownMenuTrigger>

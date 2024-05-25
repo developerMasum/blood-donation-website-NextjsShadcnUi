@@ -5,7 +5,7 @@ import assets from "@/assets";
 
 const Banner = () => {
   return (
-    <div className="relative flex flex-col lg:flex-row items-center justify-around bg-[#e4e4e4e4] text-slate-800 px-8 py-12 lg:h-screen">
+    <div className=" relative flex flex-col lg:flex-row items-center justify-around bg-[#dedede] text-slate-800 px-8 py-12 lg:h-screen">
       <div className="z-10 max-w-lg text-center lg:text-left lg:w-1/2 lg:pr-8">
         <p className="text-5xl lg:text-9xl font-bold text-red-700">#</p>
         <h1 className="text-4xl lg:text-7xl font-bold text-red-700 uppercase">
@@ -23,10 +23,11 @@ const Banner = () => {
           <p className="text-3xl lg:text-6xl font-bold text-red-700">-</p>
         </div>
         <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Consectetur
-          voluptas doloremque qui perferendis quaerat eligendi doloribus!
+          Donating blood is one of the most selfless acts of kindness. It costs
+          nothing, takes only a few moments, and can give someone a second
+          chance at life. Your small act can save lives and transform communities.
         </p>
-        <Button className="bg-gradient-to-r from-red-500 to-purple-500 text-white px-6 py-3 rounded-lg shadow-lg hover:shadow-2xl transition-all duration-300 mt-4 lg:mt-0">
+        <Button className="mt-4">
           Get Started
         </Button>
       </div>

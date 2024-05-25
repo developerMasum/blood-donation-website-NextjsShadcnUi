@@ -1,6 +1,7 @@
 import AccordionQues from "@/components/Home/AccordionQues";
 import Ads from "@/components/Home/Ads";
 import Banner from "@/components/Home/Banner";
+
 import DonorList from "@/components/Home/DonnerList";
 import Networks from "@/components/Home/Networks";
 import SaveLife from "@/components/Home/SaveLife";
@@ -8,7 +9,7 @@ import { SearchButton } from "@/components/Home/Searchutton";
 import Testimonial from "@/components/Home/Tastimonial";
 import TopDonner from "@/components/Home/TopDonner";
 import { Button } from "@/components/ui/button";
-import { Divide } from "lucide-react";
+
 import React from "react";
 
 const Home = () => {
