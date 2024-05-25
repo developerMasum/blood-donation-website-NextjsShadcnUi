@@ -44,14 +44,10 @@ export const drawerItems = (role: UserRole): ISidebarItem[] => {
         },
         {
           title: "User Management",
-          path:` ${role}/user_management`,
+          path:`${role}/user-management`,
           icon: Users,
         },
-        {
-          title: "Flat Management",
-          path: `${role}/flat_management`,
-          icon: Container,
-        }
+        
       );
       break;
     case USER_ROLE.USER:

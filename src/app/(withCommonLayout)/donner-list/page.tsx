@@ -134,8 +134,8 @@ const DonnerListPage = () => {
                       <div className="relative w-48 h-48">
                         <Image
                           src={
-                            donner?.UserProfile?.image ||
-                            "https://via.placeholder.com/150"
+                            donner?.UserProfile?.profilePhoto ||
+                            "https://thumbs.dreamstime.com/b/blood-drop-talking-cartoon-illustration-53668689.jpg"
                           }
                           alt={donner.name}
                           layout="fill"
@@ -148,21 +148,12 @@ const DonnerListPage = () => {
                           {donner.name}
                         </p>
                         <p className="text-sm text-gray-300">
-                          Blood Group:{" "}
+                          Blood Group:
                           <span className="font-bold text-red-200">
                             {donner.bloodType}
                           </span>
                         </p>
-                        <p className="text-sm text-gray-300">
-                          Total Donated:
-                          <span className="font-bold">
-                            10 times
-                          </span>
-                        </p>
-                        <p className="text-sm text-gray-300">
-                          Location:{" "}
-                          <span className="font-bold">{donner?.location}</span>
-                        </p>
+
                         <p className="text-sm font-bold text-gray-300">
                           {donner.availability === true
                             ? "Ready for Donation"

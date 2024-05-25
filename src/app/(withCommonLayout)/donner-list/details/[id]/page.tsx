@@ -48,7 +48,10 @@ const DonnerDetailsPage = ({ params }: TParams) => {
         <div className="flex flex-col items-center lg:items-start">
           <Card className="w-full max-w-xs lg:w-[230px]">
             <Image
-              src="https://i.pinimg.com/originals/e4/5d/a5/e45da5e4523d51f7515493fe09e18843.jpg"
+              src={
+                data?.UserProfile?.profilePhoto ||
+                "https://thumbs.dreamstime.com/b/blood-drop-talking-cartoon-illustration-53668689.jpg"
+              }
               alt="donner"
               width={400}
               height={400}

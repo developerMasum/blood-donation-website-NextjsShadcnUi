@@ -10,9 +10,10 @@ export interface TDonner {
   UserProfile: {
     id: string;
     userId: string;
-    bio: string;
-    age: number;
+    bio: string | null;
+    age: number | null;
     lastDonationDate: string;
+    profilePhoto: string | null;
     createdAt: string;
     updatedAt: string;
   };

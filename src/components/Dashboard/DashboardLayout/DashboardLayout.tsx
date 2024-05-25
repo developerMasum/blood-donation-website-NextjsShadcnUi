@@ -34,6 +34,9 @@ import { getUserInfo } from "@/services/actions/auth.services";
 
 import SidebarLink from "../Sidebar/SidebarLink";
 import { drawerItems } from "../Sidebar/SidebarItems";
+import Image from "next/image";
+import assets from "@/assets";
+import AuthButton from "@/components/shared/AuthButton";
 
 
 export function DashboardLayout({ children }: { children: React.ReactNode }) {
@@ -51,8 +54,17 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
         <div className="flex h-full max-h-screen flex-col gap-2">
           <div className="flex h-14 items-center border-b px-4 lg:h-[60px] lg:px-6">
             <Link href="/" className="flex items-center gap-2 font-semibold">
-              <Package2 className="h-6 w-6" />
-              <span className="">ShareNest</span>
+              <Image
+                src={assets.icons.logo}
+                alt="logo"
+                width={50}
+                height={50}
+                // className="h-6 w-6"
+              />
+              <p className="uppercase text-sm">
+                <span className="text-red-600 text-sm mr-1">Plasma</span>
+                Pioneers
+              </p>
             </Link>
             <Button variant="outline" size="icon" className="ml-auto h-8 w-8">
               <Bell className="h-4 w-4" />
@@ -75,7 +87,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
             </nav>
           </div>
           <div className="mt-auto p-4">
-            <p>Setting</p>
+            <AuthButton />
           </div>
         </div>
       </div>
@@ -108,12 +120,12 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                 ))}
               </nav>
               <div className="mt-auto p-4">
-                <p>Setting</p>
+                <AuthButton />
               </div>
             </SheetContent>
           </Sheet>
           <div className="w-full flex-1">
-            <form>
+            {/* <form>
               <div className="relative">
                 <Search className="absolute left-2.5 top-2.5 h-4 w-4 text-muted-foreground" />
                 <Input
@@ -122,7 +134,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                   className="w-full appearance-none bg-background pl-8 shadow-none md:w-2/3 lg:w-1/3"
                 />
               </div>
-            </form>
+            </form> */}
           </div>
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -137,7 +149,6 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
               <DropdownMenuItem>Settings</DropdownMenuItem>
               <DropdownMenuItem>Support</DropdownMenuItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>Logout</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         </header>

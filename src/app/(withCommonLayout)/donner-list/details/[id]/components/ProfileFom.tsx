@@ -58,7 +58,7 @@ const ProfileForm = ({
 }) => {
 
   const { data, isLoading } = useGetSingleDonnerQuery(userInfo.id as string);
-  console.log(currentDonnerId, "+++++++++");
+  // console.log(currentDonnerId, "+++++++++");
   const [createDonnerRequest] = useCreateDonnerRequestMutation();
   const router = useRouter();
 
@@ -83,12 +83,19 @@ const ProfileForm = ({
       dateOfDonation: values.dateOfDonation,
       donorId: currentDonnerId,
     };
-    console.log(data, "data...............");
+    // console.log(data, "data...............");
     try {
       const result = await createDonnerRequest(data).unwrap();
-      console.log("Request succeeded:", result);
+      // console.log(result)
+      if (result) {
+        toast("Request sent successfully");
+        
+        router.push("/donner-list");
+      }
+      // console.log("Request succeeded:", result);
     } catch (error) {
       console.log("Request failed:", error);
+      toast.error("Request failed");
     }
   };
 

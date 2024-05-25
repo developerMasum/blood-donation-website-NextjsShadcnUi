@@ -24,34 +24,31 @@ import { Button } from "@/components/ui/button";
 import { uploadImage } from "@/utils/UploadImage";
 import { useRouter } from "next/navigation";
 import { useCreateUserMutation } from "@/redux/api/userApi";
-const formSchema = z
-  .object({
-    email: z.string().email({
-      message: "Please enter valid email",
-    }),
-    password: z.string().min(6, {
-      message: "Password at least 6 characters",
-    }),
-    name: z.string().min(1, {
-      message: "Enter your yserName",
-    }),
-    contactNumber: z.string().min(1, {
-      message: "Enter your contact number",
-    }),
-    bloodType: z.string().min(1, {
-      message: "Enter your blood Type ",
-    }),
-    location: z.string().min(1, {
-      message: "Enter your location",
-    }),
-    profilePhoto: z.any(),
+const formSchema = z.object({
+  email: z.string().email({
+    message: "Please enter valid email",
+  }),
+  password: z.string().min(6, {
+    message: "Password at least 6 characters",
+  }),
+  name: z.string().min(1, {
+    message: "Enter your Name",
+  }),
+  bio: z.string().min(1, {
+    message: "Enter your Bio",
+  }),
 
-    confirmPassword: z.string().min(6, "password confirmation is required"),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    path: ["confirmPassword"],
-    message: "password do not match!!!",
-  });
+  contactNumber: z.string().min(1, {
+    message: "Enter your contact number",
+  }),
+  bloodType: z.string().min(1, {
+    message: "Enter your blood Type ",
+  }),
+  location: z.string().min(1, {
+    message: "Enter your location",
+  }),
+  profilePhoto: z.any(),
+});
 
 const SignUpForm = () => {
   const router = useRouter();
@@ -62,11 +59,12 @@ const SignUpForm = () => {
       email: "",
       password: "",
       name: "",
-      confirmPassword: "",
+
       profilePhoto: null,
       contactNumber: "",
       location: "",
       bloodType: "",
+      bio: "",
     },
   });
 
@@ -116,7 +114,11 @@ const SignUpForm = () => {
                 <FormItem>
                   <FormLabel>Blood Group</FormLabel>
                   <FormControl>
-                    <Input type="text" placeholder="Blood group  format (A+,A-,B+,B-,AB+,AB-,O+,O-)" {...field} />
+                    <Input
+                      type="text"
+                      placeholder="use format (A+,A-,B+,B-,AB+,AB-,O+,O-)"
+                      {...field}
+                    />
                   </FormControl>
 
                   <FormMessage />
@@ -159,24 +161,7 @@ const SignUpForm = () => {
                 </FormItem>
               )}
             />
-            <FormField
-              control={form.control}
-              name="confirmPassword"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Re-Enter your password</FormLabel>
-                  <FormControl>
-                    <Input
-                      type="password"
-                      placeholder="Re-Enter your password"
-                      {...field}
-                    />
-                  </FormControl>
 
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
             <FormField
               control={form.control}
               name="contactNumber"
@@ -195,6 +180,7 @@ const SignUpForm = () => {
                 </FormItem>
               )}
             />
+
             <FormField
               control={form.control}
               name="location"
@@ -202,11 +188,21 @@ const SignUpForm = () => {
                 <FormItem>
                   <FormLabel>Location</FormLabel>
                   <FormControl>
-                    <Input
-                      type="text"
-                      placeholder="Location.."
-                      {...field}
-                    />
+                    <Input type="text" placeholder="Location.." {...field} />
+                  </FormControl>
+
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="bio"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Your Bio</FormLabel>
+                  <FormControl>
+                    <Input type="text" placeholder="Bio..." {...field} />
                   </FormControl>
 
                   <FormMessage />
@@ -231,12 +227,11 @@ const SignUpForm = () => {
               )}
             />
           </div>
-          <Button className="w-[100%] mt-2" type="submit">
-            SignUp
+          <Button className="w-full mt-2" type="submit" disabled={isLoading}>
+            {isLoading ? "Signing Up..." : "Sign Up"}
           </Button>
-
           <CardFooter>
-            if have you an account, please
+            {`If you have an account, please `}
             <Link href="/login" className="text-blue-500 hover:underline">
               Sign in
             </Link>

@@ -5,27 +5,14 @@ import { IMeta } from "@/types";
 
 export const userApi = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    // getAllAdmins: build.query({
-    //   query: (arg: Record<string, any>) => ({
-    //     url: "/admin",
-    //     method: "GET",
-    //     params: arg,
-    //   }),
-    //   transformResponse: (response: TAdmin[], meta: IMeta) => {
-    //     return {
-    //       admins: response,
-    //       meta,
-    //     };
-    //   },
-    //   providesTags: [tagTypes.admin],
-    // }),
+   
 
-    deleteAdmin: build.mutation({
+    deleteUser: build.mutation({
       query: (id) => ({
-        url: `/admin/soft/${id}`,
+        url: `/user/${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: [tagTypes.admin],
+      invalidatesTags: [tagTypes.donner],
     }),
     createUser: build.mutation({
       query: (data) => ({
@@ -57,7 +44,7 @@ export const userApi = baseApi.injectEndpoints({
 
 export const {
   //   useGetAllAdminsQuery,
-  useDeleteAdminMutation,
+useDeleteUserMutation,
   useGetSingleAdminQuery,
   useUpdateAdminMutation,
   useCreateUserMutation,
