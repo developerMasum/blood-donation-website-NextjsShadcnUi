@@ -1,3 +1,4 @@
+
 import { baseApi } from "./baseApi";
 import { tagTypes } from "../tag-types";
 import { IMeta } from "@/types/common";
@@ -35,7 +36,20 @@ export const donnerApi = baseApi.injectEndpoints({
       providesTags: [tagTypes.donner],
     }),
 
-    getMyRequests: build.query({
+    gotRequests: build.query({
+      query: (arg: Record<string, any>) => ({
+        url: "/donation-request/got-requests",
+        method: "GET",
+        params: arg,
+      }),
+      transformResponse: (response) => {
+        return {
+          donner: response,
+        };
+      },
+      providesTags: [tagTypes.donner],
+    }),
+    myRequests: build.query({
       query: (arg: Record<string, any>) => ({
         url: "/donation-request/my-requests",
         method: "GET",
@@ -64,13 +78,13 @@ export const donnerApi = baseApi.injectEndpoints({
       }),
       providesTags: [tagTypes.donner],
     }),
-    // update a doctor
-    updatedonner: build.mutation({
+
+    updateStatus: build.mutation({
       query: (data) => {
         console.log(data);
         return {
-          url: `/donner/${data.id}`,
-          method: "PATCH",
+          url: `/update-status/${data.id}`,
+          method: "POST",
           data: data.body,
         };
       },
@@ -79,4 +93,11 @@ export const donnerApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetAllDonnerQuery,useGetSingleDonnerQuery,useCreateDonnerRequestMutation ,useGetMyRequestsQuery} = donnerApi;
+export const {
+  useGetAllDonnerQuery,
+  useGetSingleDonnerQuery,
+  useCreateDonnerRequestMutation,
+  useGotRequestsQuery,
+  useUpdateStatusMutation,
+useMyRequestsQuery
+} = donnerApi;

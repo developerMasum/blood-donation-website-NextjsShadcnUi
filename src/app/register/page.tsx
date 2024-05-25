@@ -1,28 +1,22 @@
-import React from "react";
-import assets from "@/assets";
-import Image from "next/image";
-import SignUpForm from "@/components/Forms/Auth/ResgisterForm";
-// import SignUpForm from "@/components/Form/SignUpForm";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
-const RegisterPage = () => {
+const HomePage = () => {
   return (
-    <div className="flex items-center justify-center p-2">
-      <div className="flex flex-col md:flex-row items-center justify-center gap-8 bg-white p-4 rounded-lg shadow-md">
-        <div className="w-full max-w-md">
-          <SignUpForm />
-        </div>
-
-        <div className="flex-shrink-0">
-          {/* <Image
-            src={assets.svg.login}
-            width={200}
-            height={200}
-            alt="Login Illustration"
-          /> */}
+    <div className="flex justify-center items-center h-screen">
+      <div className="text-center">
+        <h1 className="text-2xl font-bold mb-8 ">Welcome to Be A Hero...</h1>
+        <div className="space-x-4">
+          <Link href="/register-user">
+            <Button type="button" variant="outline"> Register as User </Button>
+          </Link>
+          <Link href="/register-donner">
+            <Button> Register as Donor</Button>
+          </Link>
         </div>
       </div>
     </div>
   );
 };
 
-export default RegisterPage;
+export default HomePage;

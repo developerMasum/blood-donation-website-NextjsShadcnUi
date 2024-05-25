@@ -67,8 +67,8 @@ export const drawerItems = (role: UserRole): ISidebarItem[] => {
           icon: UserCog,
         },
         {
-          title: "Blood Requests",
-          path: `${role}/donation-request`,
+          title: "Got Blood Requests",
+          path: `${role}/got-requests`,
           icon: UserCog,
         }
       );
