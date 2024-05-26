@@ -123,7 +123,7 @@ const DonnerListPage = () => {
         </div>
       )}
 
-      <div className="grid grid-cols-2 md:lg:grid-cols-6 gap-4 mt-12">
+      <div className="grid grid-cols-1 md:lg:grid-cols-5 gap-5 mt-12">
         {donners &&
           donners.map((donner: TDonner) => (
             <div key={donner.id} className="flex justify-center items-center">

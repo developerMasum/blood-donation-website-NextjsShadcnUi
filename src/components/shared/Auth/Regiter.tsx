@@ -232,7 +232,7 @@ const SignUpForm = () => {
           </Button>
           <CardFooter>
             {`If you have an account, please `}
-            <Link href="/login" className="text-blue-500 hover:underline">
+            <Link href="/login" className="text-red-800 ml-2 hover:underline">
               Sign in
             </Link>
           </CardFooter>

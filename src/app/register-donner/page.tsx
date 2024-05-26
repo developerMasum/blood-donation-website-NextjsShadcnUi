@@ -17,11 +17,11 @@ const RegisterPage = () => {
             <div className="w-full md:w-3/4">
               <SignUpForm />
             </div>
-            <div className="hidden md:block md:w-1/4">
+            <div className="hidden md:block md:w-3/4">
               <Image
-                src={assets.images.banner}
-                width={400}
-                height={400}
+                src={assets.images.logInImg}
+                width={600}
+                height={700}
                 alt="Login Illustration"
                 className="rounded-lg"
               />

@@ -10,6 +10,8 @@ const assets = {
     inform: require("./inform-icon.png"),
     resources: require("./resources-icon.png"),
     donorImg: require("./donor-purple-circle.png"),
+    logInImg: require("./loginWithOutBG.png"),
+    logInImg2: require("./donate-icon.png"),
   },
   icons: {
     yahoo: require("./icons/yahoo-news-img 1.png"),

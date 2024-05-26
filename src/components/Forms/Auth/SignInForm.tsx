@@ -112,12 +112,12 @@ const router = useRouter();
             )}
           />
           <Button className="w-[100%]" type="submit">
-            SignIN
+            Signin
           </Button>
 
           <CardFooter>
             if you don&apos;t have an account,please
-            <Link href="/register" className="text-blue-500 hover:underline">
+            <Link href="/register" className="text-red-700 ml-2 hover:underline">
               Sign up
             </Link>
           </CardFooter>

@@ -49,7 +49,7 @@ const AccordionQues = () => {
               <div>
                 <AccordionItem value="item-1">
                   <AccordionTrigger>
-                    Are there any medical conditions that prevent someone from
+                    Is there any medical conditions that prevent from
                     donating blood?
                   </AccordionTrigger>
                   <AccordionContent>
