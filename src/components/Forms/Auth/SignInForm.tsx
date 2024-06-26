@@ -67,9 +67,9 @@ const router = useRouter();
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
-        <Card className="w-full max-w-md space-y-4 p-4 border-0 shadow-sm">
-          <CardHeader>
-            <CardTitle className="text-2xl">Login</CardTitle>
+        <div className="w-full max-w-md">
+          <CardHeader className="p-0">
+            <CardTitle className="text-4xl">Login</CardTitle>
             <CardDescription>
               Enter your email below to login to your account.
             </CardDescription>
@@ -111,17 +111,20 @@ const router = useRouter();
               </FormItem>
             )}
           />
-          <Button className="w-[100%]" type="submit">
-            SignIN
+          <Button className="w-[100%] uppercase mt-2" type="submit">
+            Sign in
           </Button>
 
-          <CardFooter>
+          <div className="mt-2">
             if you don&apos;t have an account,please
-            <Link href="/register" className="text-blue-500 hover:underline">
+            <Link
+              href="/register"
+              className="text-red-700 hover:underline ml-2  font-semibold"
+            >
               Sign up
             </Link>
-          </CardFooter>
-        </Card>
+          </div>
+        </div>
       </form>
     </Form>
   );

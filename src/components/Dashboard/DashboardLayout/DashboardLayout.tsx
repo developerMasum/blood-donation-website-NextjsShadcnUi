@@ -28,7 +28,6 @@ import { Input } from "@/components/ui/input";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import React, { useEffect, useState } from "react";
 
-
 import { UserRole } from "@/types";
 import { getUserInfo } from "@/services/actions/auth.services";
 
@@ -37,7 +36,6 @@ import { drawerItems } from "../Sidebar/SidebarItems";
 import Image from "next/image";
 import assets from "@/assets";
 import AuthButton from "@/components/shared/AuthButton";
-
 
 export function DashboardLayout({ children }: { children: React.ReactNode }) {
   const [userRole, setUserRole] = useState("");
@@ -62,8 +60,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
                 // className="h-6 w-6"
               />
               <p className="uppercase text-sm">
-                <span className="text-red-600 text-sm mr-1">Plasma</span>
-                Pioneers
+                <span className="text-red-600 text-sm mr-1">Alor Pothik</span>
               </p>
             </Link>
             <Button variant="outline" size="icon" className="ml-auto h-8 w-8">
@@ -136,7 +133,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
               </div>
             </form> */}
           </div>
-          <DropdownMenu>
+          {/* <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="secondary" size="icon" className="rounded-full">
                 <CircleUser className="h-5 w-5" />
@@ -150,7 +147,7 @@ export function DashboardLayout({ children }: { children: React.ReactNode }) {
               <DropdownMenuItem>Support</DropdownMenuItem>
               <DropdownMenuSeparator />
             </DropdownMenuContent>
-          </DropdownMenu>
+          </DropdownMenu> */}
         </header>
         <main className="flex flex-1 flex-col gap-4 p-4 lg:gap-6 lg:p-6">
           {children}

@@ -1,49 +1,26 @@
+"use client";
 import React from "react";
 import Link from "next/link";
 import { HandHeart } from "lucide-react";
-
-const donors = [
-  {
-    id: 1,
-    times: "60",
-    number: "113",
-   
-    link: "/donor/113",
-  },
-  {
-    id: 2,
-    times: "26",
-    number: "2649",
-  
-    link: "/donor/2649",
-  },
-  {
-    id: 3,
-    times: "10",
-    number: "12026",
-  
-    link: "/donor/12026",
-  },
-  {
-    id: 4,
-    times: "3",
-    number: "55025",
-   
-    link: "/donor/55025",
-  },
-];
+import { useGetBestDonnersWithTimeOfDonationsQuery } from "@/redux/api/dashboardApi";
 
 const DonorList = () => {
+  const { data, isLoading } = useGetBestDonnersWithTimeOfDonationsQuery({});
+  // console.log(data);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
   return (
     <div className="bg-red-500 p-8 w-[380px]">
       <div className="text-center mb-6">
-        <h1 className="text-2xl font-bold text-white">List of blood donors</h1>
-        <p className="text-white">
-          honored by Quantum Voluntary Blood Donation Program
-        </p>
+        <h1 className="text-2xl font-bold text-white">
+          List of Top blood donors
+        </h1>
+        <p className="text-white">Honored by Alor Pothik Blood Foundation</p>
       </div>
       <div className="space-y-4">
-        {donors.map((donor) => (
+        {data.map((donor: any) => (
           <Link
             href="/donner-list"
             key={donor.id}
@@ -51,13 +28,15 @@ const DonorList = () => {
           >
             <div className="flex items-center bg-white rounded-xl shadow-md overflow-hidden">
               <div className="p-2 rounded-full bg-red-500 ms-3">
-              <HandHeart color="white"/>
+                <HandHeart color="white" />
               </div>
               <div className="flex-1 p-4">
                 <p className="text-lg font-semibold text-gray-900">
                   {donor.times} times
                 </p>
-                <p className="text-sm text-gray-500">{donor.number}</p>
+                <p className="text-sm text-gray-500">
+                  {donor.numberOfPeople} Donner
+                </p>
               </div>
               <div className="p-4">
                 <svg

@@ -9,6 +9,7 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { RequestDialog } from "./components/RequestDialog";
 import { getUserInfo } from "@/services/actions/auth.services";
+import Countdown from "@/components/shared/CountDown";
 
 export type TParams = {
   params: {
@@ -27,7 +28,7 @@ const DonnerDetailsPage = ({ params }: TParams) => {
     // console.log(userInfo)
   const { data, isLoading } = useGetSingleDonnerQuery(params.id);
   const [open, setOpen] = useState(false);
-
+// console.log(data)
   if (isLoading) {
     return <div>Loading...</div>;
   }
@@ -49,7 +50,7 @@ const DonnerDetailsPage = ({ params }: TParams) => {
           <Card className="w-full max-w-xs lg:w-[230px]">
             <Image
               src={
-                data?.UserProfile?.profilePhoto ||
+                data?.DonorProfile?.profilePhoto ||
                 "https://thumbs.dreamstime.com/b/blood-drop-talking-cartoon-illustration-53668689.jpg"
               }
               alt="donner"
@@ -58,18 +59,27 @@ const DonnerDetailsPage = ({ params }: TParams) => {
               className="object-cover"
             />
           </Card>
-          <div className="px-2 py-2 text-xl font-semibold bg-slate-100 w-full max-w-sm lg:w-56 rounded-md shadow-lg mt-4">
-            <p className="text-red-700">{data?.UserProfile?.bio}</p>
-          </div>
+          {
+            <div className="px-2 py-2 text-xl font-semibold bg-slate-100 w-full max-w-sm lg:w-56 rounded-md shadow-lg mt-4">
+              <p className="text-red-700">{data?.DonorProfile?.bio}</p>
+            </div>
+          }
 
-          <div className="mt-8">
-            <RequestDialog
-              currentDonnerId={currentDonnerId}
-              userInfo={userInfo}
-              open={open}
-              setOpen={setOpen}
-            />
-          </div>
+          {data?.availability === true ? (
+            <div className="mt-8">
+              <RequestDialog
+                currentDonnerId={currentDonnerId}
+                userInfo={userInfo}
+                open={open}
+                setOpen={setOpen}
+              />
+            </div>
+          ) : (
+            <div className="mt-3">
+              <p className="text-slate-700 font-semibold">This donner can be made after a period of ...</p>
+              <Countdown targetDate={data?.DonorProfile?.lastDonationDate} />
+            </div>
+          )}
         </div>
         <div className="flex flex-col items-center lg:items-start">
           <p className="px-3 py-3 text-xl font-semibold text-green-600  text-center">
@@ -91,14 +101,23 @@ const DonnerDetailsPage = ({ params }: TParams) => {
                 </div>
               </div>
             </div>
-            <div>
-              <p className="text-slate-500">Available For Donate:</p>
-              <div className="px-2 py-2 text-xl font-semibold bg-slate-100 rounded-md shadow-lg">
-                <p className="text-red-700">
-                  {data?.availability ? "Available" : "Not Available"}
-                </p>
+            <div className="flex flex-row gap-12">
+              <div>
+                <p className="text-slate-500">Available For Donate:</p>
+                <div className="px-2 py-2 text-xl font-semibold bg-slate-100 rounded-md shadow-lg">
+                  <p className="text-red-700">
+                    {data?.availability ? "Available" : "Not Available"}
+                  </p>
+                </div>
+              </div>
+              <div>
+                <p className="text-slate-500">Total Donations:</p>
+                <div className="px-2 py-2 text-xl font-semibold bg-slate-100 rounded-md shadow-lg">
+                  <p className="text-red-700">{data?.totalDonations} times</p>
+                </div>
               </div>
             </div>
+
             <div>
               <p className="text-slate-500">Donner Email:</p>
               <div className="px-2 py-2 text-xl font-semibold bg-slate-100 rounded-md shadow-lg">
@@ -106,27 +125,40 @@ const DonnerDetailsPage = ({ params }: TParams) => {
               </div>
             </div>
             <div className="flex flex-row gap-12">
+              {data?.DonorProfile?.age && (
+                <div>
+                  <p className="text-slate-500">Donner Age:</p>
+                  <div className="px-2 py-2 text-xl font-semibold bg-slate-100 rounded-md shadow-lg">
+                    <p className="text-red-700">{data?.DonorProfile?.age}</p>
+                  </div>
+                </div>
+              )}
+              {data?.location && (
+                <div>
+                  <p className="text-slate-500">Location:</p>
+                  <div className="px-2 py-2 text-xl font-semibold bg-slate-100 rounded-md shadow-lg">
+                    <p className="text-red-700">{data?.location}</p>
+                  </div>
+                </div>
+              )}
+            </div>
+            {data?.DonorProfile?.lastDonationDate && (
               <div>
-                <p className="text-slate-500">Donner Age:</p>
+                <p className="text-slate-500">Last Donation Date:</p>
                 <div className="px-2 py-2 text-xl font-semibold bg-slate-100 rounded-md shadow-lg">
-                  <p className="text-red-700">{data?.UserProfile?.age}</p>
+                  <p className="text-red-700">
+                    {data?.DonorProfile?.lastDonationDate &&
+                      new Date(
+                        data?.DonorProfile?.lastDonationDate
+                      ).toLocaleDateString("en-US", {
+                        day: "2-digit",
+                        month: "long",
+                        year: "numeric",
+                      })}
+                  </p>
                 </div>
               </div>
-              <div>
-                <p className="text-slate-500">Location:</p>
-                <div className="px-2 py-2 text-xl font-semibold bg-slate-100 rounded-md shadow-lg">
-                  <p className="text-red-700">{data?.location}</p>
-                </div>
-              </div>
-            </div>
-            <div>
-              <p className="text-slate-500">Last Donation Date:</p>
-              <div className="px-2 py-2 text-xl font-semibold bg-slate-100 rounded-md shadow-lg">
-                <p className="text-red-700">
-                  {data?.UserProfile?.lastDonationDate}
-                </p>
-              </div>
-            </div>
+            )}
           </div>
         </div>
       </div>

@@ -4,12 +4,13 @@ import React from "react";
 const Testimonial = () => {
   return (
     <div className="flex flex-col items-center mt-12">
-      <div>
+      <div className="px-5 md:lg:px-0">
         <p className="text-center text-4xl  text-red-700 font-bold mb-8 uppercase">
           #Donner Requester Said
         </p>
         <p>
-          The most valuable testimonials are ones that have inspired us make some
+          The most valuable testimonials are ones that have inspired us make
+          some
         </p>
       </div>
       <div className="md:lg:container my-12 mx-auto px-0 md:lg:px-6">
@@ -23,10 +24,12 @@ const Testimonial = () => {
                     <h2 className="mb-2 text-3xl font-bold text-primary dark:text-primary-400">
                       Anna Smith
                     </h2>
-                    <p className="mb-4 font-semibold">Fashion Designer & Model</p>
+                    <p className="mb-4 font-semibold">
+                      Fashion Designer & Model
+                    </p>
                     <p className="mb-6 text-neutral-500 dark:text-neutral-300">
-                      &quot;This platform saved my loved one&apos;s life. Grateful
-                      beyond words!&quot;
+                      &quot;This platform saved my loved one&apos;s life.
+                      Grateful beyond words!&quot;
                     </p>
                     <p className="text-lg font-semibold text-neutral-700 dark:text-neutral-300">
                       &quot; I&apos;ll never forget the day when my family faced

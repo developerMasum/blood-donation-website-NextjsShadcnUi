@@ -2,20 +2,15 @@ export interface TDonner {
   id: string;
   name: string;
   email: string;
+  totalDonations: number;
   bloodType: string;
   location: string;
   availability: boolean;
   createdAt: string;
   updatedAt: string;
-  UserProfile: {
-    id: string;
-    userId: string;
-    bio: string | null;
-    age: number | null;
-    lastDonationDate: string;
-    profilePhoto: string | null;
-    createdAt: string;
-    updatedAt: string;
+  DonorProfile: {
+    lastDonationDate: string | null;
+    profilePhoto:string | null;
   };
 } 
 

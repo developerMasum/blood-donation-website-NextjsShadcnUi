@@ -1,6 +1,5 @@
 import * as React from "react";
 
-
 // import { useMediaQuery, } from "@/hooks/use-media-query";
 import { Button } from "@/components/ui/button";
 
@@ -12,36 +11,30 @@ import {
   DrawerHeader,
   DrawerTrigger,
 } from "@/components/ui/drawer";
-
-import ProfileForm from "./ProfileFom";
-import { TUserType } from "../page";
+import UpdateForm from "./UpdateForm";
 
 
-export const RequestDialog = ({
+
+
+export const UpdateDialog = ({
   open,
   setOpen,
-  userInfo,
-  currentDonnerId,
+  id,
 }: {
   open: boolean;
   setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  userInfo: TUserType;
-  currentDonnerId: string;
+ 
+  id: string;
 }) => {
   return (
     <Drawer open={open} onOpenChange={setOpen}>
       <DrawerTrigger asChild>
-        <Button>Request For Blood</Button>
+        <Button variant="outline">Update</Button>
       </DrawerTrigger>
       <DrawerContent className="flex justify-center items-center ">
-        <div className="bg-white p-6 rounded-lg w-full md:lg:w-5/12 mx-auto">
-          <DrawerHeader className="text-center">
-            {/* <DrawerTitle>User Request</DrawerTitle>
-            <DrawerDescription>
-              Use proper location and hospital name
-            </DrawerDescription> */}
-          </DrawerHeader>
-          <ProfileForm currentDonnerId={currentDonnerId} userInfo={userInfo}  />
+        <div className="bg-white p-6 rounded-lg w-5/12 mx-auto">
+          <DrawerHeader className="text-center"></DrawerHeader>
+          <UpdateForm setOpen={setOpen} id={id} />
           <DrawerFooter className="pt-2 flex justify-end">
             <DrawerClose asChild>
               <Button variant="outline">Cancel</Button>

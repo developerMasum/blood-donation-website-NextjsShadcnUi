@@ -4,6 +4,8 @@ import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
+import { format } from "date-fns";
 import {
   Form,
   FormControl,
@@ -25,13 +27,23 @@ import { userLogin } from "@/services/actions/userLogin";
 import { toast } from "sonner";
 import { getUserInfo, storeUserInfo } from "@/services/actions/auth.services";
 import { useRouter } from "next/navigation";
-import { useCreateDonnerRequestMutation, useGetSingleDonnerQuery } from "@/redux/api/donnerApi";
+import {
+  useCreateDonnerRequestMutation,
+  useGetSingleDonnerQuery,
+} from "@/redux/api/donnerApi";
 import { useGetMYProfileQuery } from "@/redux/api/myProfile";
 import { TUserType } from "../page";
+import { CalendarIcon } from "lucide-react";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { Calendar } from "@/components/ui/calendar";
 
 const formSchema = z.object({
-  phoneNumber: z.string().length(11, {
-    message: "Phone number must be 11 characters",
+  phoneNumber: z.string().regex(/^01[3-9]\d{8}$/, {
+    message: "Phone number must start with 01 and must be 11 digits long",
   }),
   hospitalName: z.string().min(6, {
     message: "Hospital name must be at least 6 characters",
@@ -42,23 +54,19 @@ const formSchema = z.object({
   reason: z.string().min(2, {
     message: "Reason must be valid",
   }),
-  dateOfDonation: z.string().min(2, {
-    message: "Date must be valid",
+  dateOfDonation: z.date({
+    required_error: "Date must be valid",
   }),
 });
 
 const ProfileForm = ({
-  
   userInfo,
   currentDonnerId,
 }: {
- 
   userInfo: TUserType;
   currentDonnerId: string;
 }) => {
-
   const { data, isLoading } = useGetSingleDonnerQuery(userInfo.id as string);
-  // console.log(currentDonnerId, "+++++++++");
   const [createDonnerRequest] = useCreateDonnerRequestMutation();
   const router = useRouter();
 
@@ -69,12 +77,11 @@ const ProfileForm = ({
       hospitalName: "",
       hospitalAddress: "",
       reason: "",
-      dateOfDonation: "",
+      dateOfDonation: undefined,
     },
   });
 
   const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    // console.log(values);
     const data = {
       phoneNumber: values.phoneNumber,
       hospitalName: values.hospitalName,
@@ -83,16 +90,12 @@ const ProfileForm = ({
       dateOfDonation: values.dateOfDonation,
       donorId: currentDonnerId,
     };
-    // console.log(data, "data...............");
     try {
       const result = await createDonnerRequest(data).unwrap();
-      // console.log(result)
       if (result) {
         toast("Request sent successfully");
-        
         router.push("/donner-list");
       }
-      // console.log("Request succeeded:", result);
     } catch (error) {
       console.log("Request failed:", error);
       toast.error("Request failed");
@@ -101,10 +104,7 @@ const ProfileForm = ({
 
   return (
     <Form {...form}>
-      <form
-        onSubmit={form.handleSubmit(onSubmit)}
-        className="w-full px-4 "
-      >
+      <form onSubmit={form.handleSubmit(onSubmit)} className="w-full px-4 ">
         <div className="w-full space-y-4 p-4 border-0 shadow-sm">
           <FormField
             control={form.control}
@@ -115,7 +115,7 @@ const ProfileForm = ({
                 <FormControl>
                   <Input
                     type="text"
-                    placeholder="Enter Phone Number"
+                    placeholder="Enter Your Phone Number"
                     {...field}
                   />
                 </FormControl>
@@ -178,15 +178,45 @@ const ProfileForm = ({
             control={form.control}
             name="dateOfDonation"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="flex flex-col">
                 <FormLabel>Date of Donation</FormLabel>
-                <FormControl>
-                  <Input
-                    type="text"
-                    placeholder="Date of Donation"
-                    {...field}
-                  />
-                </FormControl>
+                <Popover>
+                  <PopoverTrigger asChild>
+                    <FormControl>
+                      <Button
+                        variant={"outline"}
+                        className={cn(
+                          "w-full pl-3 text-left font-normal",
+                          !field.value && "text-muted-foreground"
+                        )}
+                      >
+                        {field.value ? (
+                          format(field.value, "dd-MMMM-yyyy")
+                        ) : (
+                          <span>Pick Your Date</span>
+                        )}
+                        <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
+                      </Button>
+                    </FormControl>
+                  </PopoverTrigger>
+                  <PopoverContent className="w-auto p-0" align="start">
+                    <Calendar
+                      mode="single"
+                      selected={field.value}
+                      onSelect={field.onChange}
+                      disabled={(date) => {
+                        const today = new Date();
+                        today.setHours(0, 0, 0, 0);
+                        const next15Days = new Date();
+                        next15Days.setDate(today.getDate() + 15);
+                        next15Days.setHours(23, 59, 59, 999);
+
+                        return date < today || date > next15Days;
+                      }}
+                      initialFocus
+                    />
+                  </PopoverContent>
+                </Popover>
                 <FormMessage />
               </FormItem>
             )}

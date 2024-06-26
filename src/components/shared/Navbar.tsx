@@ -29,6 +29,16 @@ const Header = () => {
       show: true,
     },
     {
+      label: "Blogs",
+      path: "/blogs",
+      show: true,
+    },
+    {
+      label: "Events",
+      path: "/events",
+      show: true,
+    },
+    {
       label: "About Us",
       path: "/about-us",
       show: true,
@@ -56,7 +66,7 @@ const Header = () => {
     <>
       <div
         className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-300 ${
-          isScrolled ? "bg-white" : "bg-[#dedede]"
+          isScrolled ? "bg-white" : "bg-[#c63737]"
         }`}
       >
         <div className="mx-auto px-12">
@@ -77,14 +87,15 @@ const Header = () => {
                     <Image
                       src={assets.icons.logo}
                       alt="logo"
-                      width={40}
-                      height={40}
+                      width={20}
+                      height={20}
+                    
                     />
                   </Link>
                   <div className="grid gap-2 py-6">
                     {menuItems.map((menuItem) =>
                       menuItem.show ? (
-                        <Link  href={menuItem.path} key={menuItem.label}>
+                        <Link href={menuItem.path} key={menuItem.label}>
                           {menuItem.label}
                         </Link>
                       ) : null
@@ -93,7 +104,7 @@ const Header = () => {
                 </SheetContent>
               </Sheet>
 
-              <div className="hidden md:flex">
+              <div className="hidden md:flex ">
                 <Link
                   href="/"
                   className="flex items-center gap-2 font-semibold"
@@ -101,12 +112,12 @@ const Header = () => {
                   <Image
                     src={assets.icons.logo}
                     alt="logo"
-                    width={100}
-                    height={100}
+                    width={55}
+                    height={40}
                   />
                   <p className="uppercase">
-                    <span className="text-red-600 font-bold">Plasma</span>{" "}
-                    Pioneers
+                    <span className={` ${isScrolled ? "text-red-700" : "text-white"}  font-bold`}>AP</span>
+                   BF
                   </p>
                 </Link>
               </div>
@@ -118,7 +129,9 @@ const Header = () => {
                   <Link
                     href={menuItem.path}
                     key={menuItem.label}
-                    className="group inline-flex h-9 w-max items-center text-red-600   font-semibold"
+                    className={`group inline-flex h-9 w-max items-center ${
+                      isScrolled ? "text-slate-800" : "text-white"
+                    } font-semibold`}
                   >
                     {menuItem.label}
                   </Link>

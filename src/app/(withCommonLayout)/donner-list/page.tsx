@@ -13,6 +13,11 @@ import { FieldValues, useForm } from "react-hook-form";
 import { Button } from "@/components/ui/button";
 import { useDebounced } from "@/redux/hooks";
 import {
+  CirclesWithBar,
+  MagnifyingGlass,
+  RotatingLines,
+} from "react-loader-spinner";
+import {
   Select,
   SelectContent,
   SelectGroup,
@@ -38,11 +43,11 @@ const DonnerListPage = () => {
     delay: 600,
   });
 
-  // select 
+  // select
   const handleValueChange = (blood: string) => {
-   setBloodType(blood)
+    setBloodType(blood);
   };
-  
+
   if (!!debouncedTerm) {
     query["searchTerm"] = searchTerm;
   }
@@ -53,13 +58,13 @@ const DonnerListPage = () => {
   if (debouncedTerm) {
     query["searchTerm"] = searchTerm;
     if (bloodType) {
-      query["bloodType"] = bloodType; 
+      query["bloodType"] = bloodType;
     }
   }
 
   const { data, isLoading } = useGetAllDonnerQuery({ ...query });
   const donners: TDonner[] | undefined = data?.donner as TDonner[] | undefined;
-  // console.log(data);
+  console.log(data);
   const {
     register,
     handleSubmit,
@@ -73,24 +78,23 @@ const DonnerListPage = () => {
 
   return (
     <div className="pt-8">
-      <div className="flex justify-center">
+      <div className="flex flex-col md:flex-row justify-center items-center gap-4">
         <form onChange={handleSubmit(onSubmit)} className="flex items-center">
           <Input
             type="text"
             placeholder="Search"
             {...register("query")}
-            className="mr-2 w-72 md:lg:w-96"
+            className="mr-2 w-72 md:w-96"
           />
-
           {errors.query && (
             <span className="text-red-500">
               Please enter a valid search query
             </span>
           )}
         </form>
-        <div>
+        <div className="w-full flex justify-center md:w-auto">
           <Select onValueChange={handleValueChange}>
-            <SelectTrigger className="w-[280px]">
+            <SelectTrigger className="w-4/5  md:lg:w-[280px]">
               <SelectValue placeholder="Select Blood Group" />
             </SelectTrigger>
             <SelectContent>
@@ -107,34 +111,43 @@ const DonnerListPage = () => {
               </SelectGroup>
             </SelectContent>
           </Select>
-          {/* ----------------------------------- */}
-          {/* <SelectComponent /> */}
         </div>
-        {/* <div>
-          <ComboboxPopover />
-        </div> */}
       </div>
 
-      {isLoading && <div>Loading...</div>}
-
-      {donners && donners.length === 0 && (
-        <div className="text-center mt-4">
-          No items found by the {searchTerm}.
+      {isLoading && (
+        <div className="flex justify-center items-center h-screen">
+          <RotatingLines
+            visible={true}
+            height="200"
+            width="200"
+            color="grey"
+            strokeWidth="5"
+            animationDuration="0.75"
+            ariaLabel="rotating-lines-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+          />
         </div>
       )}
 
-      <div className="grid grid-cols-2 md:lg:grid-cols-6 gap-4 mt-12">
+      {donners && donners.length === 0 && (
+        <div className="text-center mt-4">
+          No items found for the {bloodType}.
+        </div>
+      )}
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-6 gap-4 mt-12">
         {donners &&
-          donners.map((donner: TDonner) => (
+          donners.map((donner) => (
             <div key={donner.id} className="flex justify-center items-center">
               <Link href={`/donner-list/details/${donner.id}`}>
-                <Card className="bg-red-700 w-[250px] rounded-xl shadow-md overflow-hidden transition-transform transform hover:scale-105">
-                  <CardContent className="flex aspect-square items-center justify-center gap-10 p-6">
+                <Card className="bg-red-700 w-[320px] md:lg:w-[250px] rounded-xl shadow-md overflow-hidden transition-transform transform hover:scale-105">
+                  <CardContent className="flex aspect-square items-center justify-center gap-4 p-4 sm:p-6">
                     <div className="flex flex-col items-center p-4">
-                      <div className="relative w-48 h-48">
+                      <div className="relative w-24 h-24 sm:w-48 sm:h-48">
                         <Image
                           src={
-                            donner?.UserProfile?.profilePhoto ||
+                            donner?.DonorProfile?.profilePhoto ||
                             "https://thumbs.dreamstime.com/b/blood-drop-talking-cartoon-illustration-53668689.jpg"
                           }
                           alt={donner.name}
@@ -153,7 +166,6 @@ const DonnerListPage = () => {
                             {donner.bloodType}
                           </span>
                         </p>
-
                         <p className="text-sm font-bold text-gray-300">
                           {donner.availability === true
                             ? "Ready for Donation"

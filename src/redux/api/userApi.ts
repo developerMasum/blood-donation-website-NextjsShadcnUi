@@ -16,7 +16,15 @@ export const userApi = baseApi.injectEndpoints({
     }),
     createUser: build.mutation({
       query: (data) => ({
-        url: "/register",
+        url:"/create-user",
+        method: "POST",
+        data,
+      }),
+      invalidatesTags: [tagTypes.user],
+    }),
+    createDonor: build.mutation({
+      query: (data) => ({
+        url:"/create-donor",
         method: "POST",
         data,
       }),
@@ -48,4 +56,5 @@ useDeleteUserMutation,
   useGetSingleAdminQuery,
   useUpdateAdminMutation,
   useCreateUserMutation,
+  useCreateDonorMutation
 } = userApi;

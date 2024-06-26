@@ -29,7 +29,7 @@ export default function RootLayout({
           )}
         >
           {/* mx-auto px-2 md:lg:px-12 */}
-          <div className="px-1 mx-auto">{children}</div>
+          <div className="">{children}</div>
           <Toaster />
         </body>
       </html>

@@ -11,9 +11,9 @@ import {
 } from "@/components/ui/carousel";
 import { TDonner } from "@/types/donner";
 import Autoplay from "embla-carousel-autoplay";
+import { useGestBestDonnersQuery } from "@/redux/api/dashboardApi";
 const TopDonner = () => {
-  const { data, isLoading, isError } = useGetAllDonnerQuery({});
-    const donners: TDonner[] = Array.isArray(data?.donner) ? data.donner : [];
+  const { data, isLoading, isError } = useGestBestDonnersQuery({});
 
   if (isLoading) return <p>Loading...</p>;
   if (isError) return <p>Error loading data</p>;
@@ -29,8 +29,8 @@ const TopDonner = () => {
         className="w-full max-w-screen-md"
       >
         <CarouselContent className="-ml-1">
-          {donners.length > 0 ? (
-            donners.slice(0, 5).map((donner: TDonner) => (
+          {data.length > 0 ? (
+            data.slice(0, 5).map((donner: TDonner) => (
               <CarouselItem
                 key={donner.id}
                 className="pl-1 md:basis-1/2 lg:basis-1/3 md:pl-12 "
@@ -42,7 +42,7 @@ const TopDonner = () => {
                         <div className="relative w-48 h-48">
                           <Image
                             src={
-                              donner?.UserProfile?.profilePhoto ||
+                              donner?.DonorProfile?.profilePhoto ||
                               "https://thumbs.dreamstime.com/b/blood-drop-talking-cartoon-illustration-53668689.jpg"
                             }
                             alt={donner.name}
@@ -61,8 +61,7 @@ const TopDonner = () => {
                               {donner.bloodType}
                             </span>
                           </p>
-                         
-                         
+
                           <p className="text-sm font-bold text-gray-300">
                             {donner.availability === true
                               ? "Ready for Donation"

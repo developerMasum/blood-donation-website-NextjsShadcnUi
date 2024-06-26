@@ -6,16 +6,19 @@ import Link from "next/link";
 
 const SaveLife = () => {
   return (
-    <div className="flex flex-col items-center mt-12">
+    <div className="flex flex-col items-center mt-12 px-5 md:lg:px-0">
       <div>
         <p className="text-start text-4xl  text-red-700 font-bold mb-8 uppercase">
           #We save lives
         </p>
         <p>
-          Since our founding as a charity in 2008, Global Blood Fund has
-          delivered millions of dollars in grants, equipment, training and other
-          forms of support to <br /> over 50 countries in Africa, Asia, Eastern
-          Europe, the Middle East, Latin America and the Caribbean.
+          Established in 2023,{" "}
+          <span className="text-red-700 font-semibold">
+            Alor Pothik Blood Foundation
+          </span>{" "}
+          is a nonprofit fostering blood donation awareness and providing
+          crucial transfusions, effectively <br /> combating blood shortages
+         and enhancing healthcare outcomes.
         </p>
       </div>
       <div className="flex flex-wrap gap-4 justify-center mt-5">

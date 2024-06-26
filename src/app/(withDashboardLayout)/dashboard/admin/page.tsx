@@ -6,8 +6,7 @@ const AdminPage = () => {
   return (
     <div>
       <Tabs />
-      <div className="flex justify-between gap-12 items-center mt-12 mb-12">
-    
+      <div className="flex flex-col lg:flex-row justify-between gap-12 items-center mt-12 mb-12">
         <Recent />
         <Overview />
       </div>

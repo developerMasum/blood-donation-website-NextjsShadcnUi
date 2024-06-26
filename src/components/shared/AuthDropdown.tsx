@@ -2,7 +2,6 @@ import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
-
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
@@ -13,46 +12,49 @@ import { CircleUser } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
-
 const AuthDropdown = () => {
- const userInfo = getUserInfo();
-//  console.log(userInfo
-    const loggedIn = isLoggedIn()
+  const userInfo = getUserInfo();
+  //  console.log(userInfo
+  const loggedIn = isLoggedIn();
 
-
- const router = useRouter();
- const handleLogOut = () => {
-   logoutUser(router);
- };
+  const router = useRouter();
+  const handleLogOut = () => {
+    logoutUser(router);
+  };
   return (
     <div className="">
       {loggedIn ? (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="secondary" size="icon" className="rounded-full">
-              <CircleUser color="red"  className="h-5 w-5" />
+              <CircleUser color="red" className="h-5 w-5" />
               <span className="sr-only">Toggle user menu</span>
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
-            <DropdownMenuLabel>My Account</DropdownMenuLabel>
-            <DropdownMenuSeparator />
+            {/* <DropdownMenuSeparator /> */}
             <DropdownMenuLabel>
               <Link href="dashboard">Dashboard</Link>
             </DropdownMenuLabel>
 
             <DropdownMenuSeparator />
             {userInfo?.id ? (
-              <Button onClick={handleLogOut} color="error">
+              <DropdownMenuLabel
+                onClick={handleLogOut}
+                color="error"
+                className="cursor-pointer text-red-700"
+              >
                 LogOut
-              </Button>
+              </DropdownMenuLabel>
             ) : (
               <Link href="login">Login</Link>
             )}
           </DropdownMenuContent>
         </DropdownMenu>
       ) : (
-        <Link href="login"><Button >Login</Button></Link>
+        <Link href="login">
+          <Button>Login</Button>
+        </Link>
       )}
     </div>
   );

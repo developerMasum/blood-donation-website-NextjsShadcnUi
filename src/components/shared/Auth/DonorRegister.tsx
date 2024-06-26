@@ -23,7 +23,8 @@ import { Button } from "@/components/ui/button";
 
 import { uploadImage } from "@/utils/UploadImage";
 import { useRouter } from "next/navigation";
-import { useCreateUserMutation } from "@/redux/api/userApi";
+import { useCreateDonorMutation } from "@/redux/api/userApi";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 const formSchema = z.object({
   email: z.string().email({
     message: "Please enter valid email",
@@ -34,12 +35,15 @@ const formSchema = z.object({
   name: z.string().min(1, {
     message: "Enter your Name",
   }),
+  age: z.string().min(2, {
+    message: "Enter your Age",
+  }),
   bio: z.string().min(1, {
     message: "Enter your Bio",
   }),
 
-  contactNumber: z.string().min(1, {
-    message: "Enter your contact number",
+  contactNumber: z.string().regex(/^01[3-9]\d{8}$/, {
+    message: "Phone number must start with 01 and must be 11 digits long",
   }),
   bloodType: z.string().min(1, {
     message: "Enter your blood Type ",
@@ -50,15 +54,16 @@ const formSchema = z.object({
   profilePhoto: z.any(),
 });
 
-const SignUpForm = () => {
+const DonorRegister = () => {
   const router = useRouter();
-  const [createUser, { isLoading, isError }] = useCreateUserMutation();
+  const [createUser, { isLoading, isError }] = useCreateDonorMutation();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       email: "",
       password: "",
       name: "",
+      age:"",
 
       profilePhoto: null,
       contactNumber: "",
@@ -91,23 +96,27 @@ const SignUpForm = () => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="w-full">
-        <Card className="w-full space-y-4 px-10 py-6 border-0 ">
+        <div className="w-full space-y-4 px-10 py-6 border-0 ">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 justify-center items-center">
             <FormField
               control={form.control}
               name="name"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>name</FormLabel>
+                  <FormLabel>Name</FormLabel>
                   <FormControl>
-                    <Input type="text" placeholder="jondho" {...field} />
+                    <Input
+                      type="text"
+                      placeholder="Enter your name"
+                      {...field}
+                    />
                   </FormControl>
 
                   <FormMessage />
                 </FormItem>
               )}
             />
-            <FormField
+            {/* <FormField
               control={form.control}
               name="bloodType"
               render={({ field }) => (
@@ -117,6 +126,55 @@ const SignUpForm = () => {
                     <Input
                       type="text"
                       placeholder="use format (A+,A-,B+,B-,AB+,AB-,O+,O-)"
+                      {...field}
+                    />
+                  </FormControl>
+
+                  <FormMessage />
+                </FormItem>
+              )}
+            /> */}
+
+            <FormField
+              control={form.control}
+              name="bloodType"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Blood Group</FormLabel>
+                  <Select
+                    onValueChange={field.onChange}
+                    defaultValue={field.value}
+                  >
+                    <FormControl>
+                      <SelectTrigger>
+                        <SelectValue placeholder="Select your Blood Group" />
+                      </SelectTrigger>
+                    </FormControl>
+                    <SelectContent>
+                      <SelectItem value="O+">O+</SelectItem>
+                      <SelectItem value="O-">O-</SelectItem>
+                      <SelectItem value="B+">B+</SelectItem>
+                      <SelectItem value="B-">B-</SelectItem>
+                      <SelectItem value="A+">A+</SelectItem>
+                      <SelectItem value="A-">A-</SelectItem>
+                      <SelectItem value="AB+">AB+</SelectItem>
+                      <SelectItem value="AB-">AB-</SelectItem>
+                    </SelectContent>
+                  </Select>
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="age"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Age</FormLabel>
+                  <FormControl>
+                    <Input
+                      type="text"
+                      placeholder="Enter your age"
                       {...field}
                     />
                   </FormControl>
@@ -167,11 +225,11 @@ const SignUpForm = () => {
               name="contactNumber"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>contactNumber</FormLabel>
+                  <FormLabel>Contact Number</FormLabel>
                   <FormControl>
                     <Input
                       type="text"
-                      placeholder="Contact Number.."
+                      placeholder="Enter your contact number"
                       {...field}
                     />
                   </FormControl>
@@ -188,7 +246,11 @@ const SignUpForm = () => {
                 <FormItem>
                   <FormLabel>Location</FormLabel>
                   <FormControl>
-                    <Input type="text" placeholder="Location.." {...field} />
+                    <Input
+                      type="text"
+                      placeholder="Enter your location"
+                      {...field}
+                    />
                   </FormControl>
 
                   <FormMessage />
@@ -200,9 +262,13 @@ const SignUpForm = () => {
               name="bio"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Your Bio</FormLabel>
+                  <FormLabel>Your Bio </FormLabel>
                   <FormControl>
-                    <Input type="text" placeholder="Bio..." {...field} />
+                    <Input
+                      type="text"
+                      placeholder="Enter your something about you"
+                      {...field}
+                    />
                   </FormControl>
 
                   <FormMessage />
@@ -230,16 +296,19 @@ const SignUpForm = () => {
           <Button className="w-full mt-2" type="submit" disabled={isLoading}>
             {isLoading ? "Signing Up..." : "Sign Up"}
           </Button>
-          <CardFooter>
+          <div>
             {`If you have an account, please `}
-            <Link href="/login" className="text-blue-500 hover:underline">
+            <Link
+              href="/login"
+              className="text-red-700 hover:underline ml-2 font-semibold"
+            >
               Sign in
             </Link>
-          </CardFooter>
-        </Card>
+          </div>
+        </div>
       </form>
     </Form>
   );
 };
 
-export default SignUpForm;
+export default DonorRegister;

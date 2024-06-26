@@ -24,9 +24,9 @@ const Footer = () => {
             />
             <div className="hidden md:flex mt-0 mb-8">
               <Link href="/" className="flex items-center gap-5 font-semibold">
-                <p className="uppercase flex items-center gap-2">
-                  <span className="text-red-600 font-bold">Plasma</span>
-                  Pioneers
+                <p className=" flex items-center gap-2">
+                  <span className="text-red-700 font-bold">Alor Pothik</span>
+                  Blood Foundation
                 </p>
               </Link>
             </div>

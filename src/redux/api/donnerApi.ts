@@ -1,4 +1,3 @@
-
 import { baseApi } from "./baseApi";
 import { tagTypes } from "../tag-types";
 import { IMeta } from "@/types/common";
@@ -90,6 +89,57 @@ export const donnerApi = baseApi.injectEndpoints({
       },
       invalidatesTags: [tagTypes.donner, tagTypes.user],
     }),
+
+    getAllRequests: build.query({
+      query: (arg: Record<string, any>) => ({
+        url: "/all-requests",
+        method: "GET",
+        params: arg,
+      }),
+      transformResponse: (response, meta: IMeta) => {
+        return {
+          requests: response,
+          meta,
+        };
+      },
+      providesTags: [tagTypes.donner],
+    }),
+    getAllBlogs: build.query({
+      query: (arg: Record<string, any>) => ({
+        url: "/blogs",
+        method: "GET",
+        params: arg,
+      }),
+      transformResponse: (response) => {
+        return {
+          blogs: response,
+        };
+      },
+      providesTags: [tagTypes.donner],
+    }),
+    getSingleBlog: build.query({
+      query: (id: string | string[] | undefined) => ({
+        url: `/blogs/${id}`,
+        method: "GET",
+      }),
+      providesTags: [tagTypes.donner],
+    }),
+
+    createBlogs: build.mutation({
+      query: (data) => {
+        console.log(data);
+        return {
+          url: "/blogs/create",
+          method: "POST",
+
+          headers: {
+            "Content-Type": "application/json",
+          },
+          data,
+        };
+      },
+ 
+    }),
   }),
 });
 
@@ -99,5 +149,8 @@ export const {
   useCreateDonnerRequestMutation,
   useGotRequestsQuery,
   useUpdateStatusMutation,
-useMyRequestsQuery
+  useMyRequestsQuery,
+  useGetAllRequestsQuery,
+useGetAllBlogsQuery,
+useGetSingleBlogQuery
 } = donnerApi;
