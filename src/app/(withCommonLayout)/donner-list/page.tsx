@@ -118,14 +118,14 @@ const DonnerListPage = () => {
         <div className="flex justify-center items-center h-screen">
           <RotatingLines
             visible={true}
-            height="200"
+            // height="200"
             width="200"
-            color="grey"
+            // color="grey"
             strokeWidth="5"
             animationDuration="0.75"
             ariaLabel="rotating-lines-loading"
-            wrapperStyle={{}}
-            wrapperClass=""
+            // wrapperStyle={{}}
+            // wrapperClass=""
           />
         </div>
       )}

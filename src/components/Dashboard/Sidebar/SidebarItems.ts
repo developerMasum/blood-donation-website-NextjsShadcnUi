@@ -51,11 +51,11 @@ export const drawerItems = (role: UserRole): ISidebarItem[] => {
       break;
     case USER_ROLE.USER:
       roleMenus.push(
-        {
-          title: "Dashboard",
-          path: `${role}`,
-          icon: UserCog,
-        },
+        // {
+        //   title: "Dashboard",
+        //   path: `${role}`,
+        //   icon: UserCog,
+        // },
         {
           title: "My Blood Requests",
           path: `${role}/my-requests`,
