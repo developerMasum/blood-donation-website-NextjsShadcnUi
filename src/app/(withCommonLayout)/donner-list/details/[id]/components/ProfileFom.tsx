@@ -66,7 +66,7 @@ const ProfileForm = ({
   userInfo: TUserType;
   currentDonnerId: string;
 }) => {
-  const { data, isLoading } = useGetSingleDonnerQuery(userInfo.id as string);
+  const { data, isLoading } = useGetSingleDonnerQuery(userInfo?.id as string);
   const [createDonnerRequest] = useCreateDonnerRequestMutation();
   const router = useRouter();
 
