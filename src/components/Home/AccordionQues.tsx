@@ -14,7 +14,7 @@ const AccordionQues = () => {
       <p className="text-3xl text-red-700 font-bold text-center  uppercase mt-12 mb-4">
         #Commonly Asked Questions
       </p>
-      <p  className="text-slate-600 text-start px-5 md:lg:px-0 md:lg:text-center font-semibold">
+      <p className="text-slate-600 text-start px-5 md:lg:px-0 md:lg:text-center font-semibold">
         Frequently asked questions by blood donors and blood requesters
         encompass inquiries regarding eligibility criteria, procedural <br />
         aspects, safety measures, and pertinent information crucial for both

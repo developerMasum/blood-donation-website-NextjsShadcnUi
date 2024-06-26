@@ -24,7 +24,13 @@ import { Button } from "@/components/ui/button";
 import { uploadImage } from "@/utils/UploadImage";
 import { useRouter } from "next/navigation";
 import { useCreateDonorMutation } from "@/redux/api/userApi";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 const formSchema = z.object({
   email: z.string().email({
     message: "Please enter valid email",
@@ -63,7 +69,7 @@ const DonorRegister = () => {
       email: "",
       password: "",
       name: "",
-      age:"",
+      age: "",
 
       profilePhoto: null,
       contactNumber: "",
@@ -298,10 +304,7 @@ const DonorRegister = () => {
           </Button>
           <div>
             {`If you have an account, please `}
-            <Link
-              href="/login"
-              className="text-red-700 hover:underline ml-2 font-semibold"
-            >
+            <Link href="/login" className="text-red-800 ml-2 hover:underline">
               Sign in
             </Link>
           </div>

@@ -11,6 +11,8 @@ const assets = {
     resources: require("./resources-icon.png"),
     donorImg: require("./donor-purple-circle.png"),
     goalLogo: require("./icons/logo.png"),
+    logInImg: require("./loginWithOutBG.png"),
+    logInImg2: require("./donate-icon.png"),
   },
   icons: {
     yahoo: require("./icons/yahoo-news-img 1.png"),

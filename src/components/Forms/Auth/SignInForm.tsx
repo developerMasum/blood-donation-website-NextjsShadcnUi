@@ -26,8 +26,6 @@ import { toast } from "sonner";
 import { storeUserInfo } from "@/services/actions/auth.services";
 import { useRouter } from "next/navigation";
 
-
-
 const formSchema = z.object({
   email: z.string().email({
     message: "Please enter a valid email",
@@ -38,7 +36,7 @@ const formSchema = z.object({
 });
 
 const SignInForm = () => {
-const router = useRouter();
+  const router = useRouter();
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
