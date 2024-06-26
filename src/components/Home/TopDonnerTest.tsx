@@ -2,14 +2,7 @@
 import * as React from "react";
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
-import { useGetAllDonnerQuery } from "@/redux/api/donnerApi";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel";
+
 import { TDonner } from "@/types/donner";
 import Autoplay from "embla-carousel-autoplay";
 import { useGestBestDonnersQuery } from "@/redux/api/dashboardApi";

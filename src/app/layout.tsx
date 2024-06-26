@@ -10,8 +10,8 @@ const fontSans = FontSans({
 });
 
 export const metadata: Metadata = {
-  title: "Plasma Pioneers",
-  description: " Pioneers of Plasma",
+  title: "Alor Pothik",
+  description: " Alor Pothik Blood Foundation",
 };
 
 export default function RootLayout({

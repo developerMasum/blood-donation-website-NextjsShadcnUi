@@ -78,8 +78,8 @@ const TopDonner = () => {
             <p>No donors found</p>
           )}
         </CarouselContent>
-        <CarouselPrevious />
-        <CarouselNext />
+        {/* <CarouselPrevious />
+        <CarouselNext /> */}
       </Carousel>
     </>
   );
