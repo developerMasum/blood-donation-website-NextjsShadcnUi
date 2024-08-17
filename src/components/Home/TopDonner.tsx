@@ -29,8 +29,8 @@ const TopDonner = () => {
         className="w-full max-w-screen-md"
       >
         <CarouselContent className="-ml-1">
-          {data.length > 0 ? (
-            data.slice(0, 5).map((donner: TDonner) => (
+          {data?.length > 0 ? (
+            data?.slice(0, 5)?.map((donner: TDonner) => (
               <CarouselItem
                 key={donner.id}
                 className="pl-1 md:basis-1/2 lg:basis-1/3 md:pl-12 "

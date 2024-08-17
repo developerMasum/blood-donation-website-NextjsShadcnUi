@@ -1,6 +1,16 @@
 import React from "react";
 import Image from "next/image";
 import SignInForm from "@/components/Forms/Auth/SignInForm";
+import Credential from "@/components/Credentials/Credential";
+import { Button } from "@/components/ui/button";
+
+import {
+  Dialog,
+  DialogTrigger,
+  DialogContent,
+  DialogHeader,
+  DialogFooter,
+} from "@/components/ui/dialog";
 
 const LoginPage = () => {
   return (
@@ -17,6 +27,24 @@ const LoginPage = () => {
         </div>
         <div className="w-full max-w-md">
           <SignInForm />
+          <div className="mt-4">
+            <Dialog>
+              <DialogTrigger asChild>
+                <Button variant="outline">View Credentials</Button>
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <h2 className="text-xl font-semibold">Login Credentials</h2>
+                </DialogHeader>
+
+                <Credential />
+
+                <DialogFooter>
+                  <Button variant="ghost">Close</Button>
+                </DialogFooter>
+              </DialogContent>
+            </Dialog>
+          </div>
         </div>
       </div>
     </div>

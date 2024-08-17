@@ -20,7 +20,7 @@ const DonorList = () => {
         <p className="text-white">Honored by Alor Pothik Blood Foundation</p>
       </div>
       <div className="space-y-4">
-        {data.map((donor: any) => (
+        {data?.map((donor: any) => (
           <Link
             href="/donner-list"
             key={donor.id}
